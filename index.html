@@ -1,0 +1,82 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Class 10 – Quiz: The Making of a Scientist</title>
+  <style>
+    body { font-family: Arial; background: #f4faff; padding: 20px; }
+    h1 { color: #004080; }
+    .question { margin-bottom: 20px; }
+    .options label { display: block; margin-left: 20px; }
+    button {
+      background: #007bff; color: white;
+      padding: 10px 20px; border: none;
+      font-size: 16px; margin-top: 20px;
+      cursor: pointer;
+    }
+    #score { font-weight: bold; font-size: 18px; color: green; }
+  </style>
+</head>
+<body>
+  <h1>Quiz: The Making of a Scientist</h1>
+  <form id="quizForm"></form>
+  <button onclick="submitQuiz()">Submit Quiz</button>
+  <p id="score"></p>
+
+  <script>
+    const questions = [
+      { q: "Who is the scientist in the chapter?", a: "Richard Ebright", o: ["Galileo", "Newton", "Richard Ebright", "Einstein"] },
+      { q: "What did Richard collect as a child?", a: "Butterflies", o: ["Coins", "Feathers", "Cards", "Butterflies"] },
+      { q: "Who inspired Richard?", a: "His mother", o: ["His uncle", "His mother", "His teacher", "His friend"] },
+      { q: "Which book changed his life?", a: "The Travels of Monarch X", o: ["Wings of Fire", "Science Monthly", "The Travels of Monarch X", "Insect World"] },
+      { q: "What project did he do in grade 8?", a: "Tagging butterflies", o: ["Volcano model", "Frog eggs", "Robot", "Tagging butterflies"] },
+      { q: "What inspired him about cells?", a: "A magazine article", o: ["TV show", "Biology class", "A magazine article", "Friend's advice"] },
+      { q: "What do monarch wings contain?", a: "A hormone", o: ["Spots only", "Coloring", "A hormone", "Air sacs"] },
+      { q: "What best describes Ebright?", a: "Curious", o: ["Lazy", "Curious", "Arrogant", "Angry"] },
+      { q: "What did Richard want to be?", a: "Scientist", o: ["Doctor", "Engineer", "Scientist", "Politician"] },
+      { q: "Where did he publish his work?", a: "Scientific Journal", o: ["School paper", "National Geography", "Scientific Journal", "Textbook"] },
+      { q: "What was his favorite subject?", a: "Biology", o: ["Math", "History", "Biology", "Art"] },
+      { q: "Who supported him the most?", a: "His mother", o: ["His father", "His coach", "His mother", "His tutor"] },
+      { q: "What did Monarch X teach him?", a: "Migration", o: ["Photosynthesis", "Hatching", "Migration", "Diseases"] },
+      { q: "What did he do with butterflies?", a: "Tagged them", o: ["Painted them", "Tagged them", "Froze them", "Sold them"] },
+      { q: "Why didn’t he play sports?", a: "Loved science", o: ["Asthma", "Too short", "Loved science", "No friends"] },
+      { q: "Which contest did he win?", a: "County Science Fair", o: ["Essay Contest", "National Bee", "County Science Fair", "Drawing Competition"] },
+      { q: "Which college did he go to?", a: "Harvard", o: ["Stanford", "Harvard", "Oxford", "MIT"] },
+      { q: "His first project was about?", a: "Butterfly behavior", o: ["Frog life cycle", "Plant growth", "Butterfly behavior", "Acid rain"] },
+      { q: "His attitude to failure?", a: "Motivated to improve", o: ["Gave up", "Ignored it", "Motivated to improve", "Blamed others"] },
+      { q: "Message of the story?", a: "Curiosity leads to success", o: ["Luck is everything", "Marks matter most", "Curiosity leads to success", "Parents must decide"] },
+      { q: "Other than science, he liked?", a: "Debate", o: ["Music", "Debate", "Drawing", "Swimming"] },
+      { q: "He succeeded due to?", a: "Hard work", o: ["Luck", "Hard work", "Money", "Friends"] },
+      { q: "Story type?", a: "Biography", o: ["Fiction", "Biography", "Drama", "Poetry"] },
+      { q: "How did his mom help?", a: "Bought books", o: ["Scolded him", "Bought books", "Made charts", "Did homework"] },
+      { q: "Why is he inspiring?", a: "Focused & Curious", o: ["Scored 100%", "Became rich", "Focused & Curious", "Good looks"] }
+    ];
+
+    const quizForm = document.getElementById('quizForm');
+
+    questions.forEach((item, index) => {
+      const div = document.createElement('div');
+      div.className = 'question';
+      div.innerHTML = `<strong>Q${index + 1}:</strong> ${item.q}`;
+      item.o.forEach(option => {
+        div.innerHTML += `
+          <div class="options">
+            <label><input type="radio" name="q${index}" value="${option}"> ${option}</label>
+          </div>`;
+      });
+      quizForm.appendChild(div);
+    });
+
+    function submitQuiz() {
+      let score = 0;
+      questions.forEach((item, index) => {
+        const selected = document.querySelector(`input[name="q${index}"]:checked`);
+        if (selected && selected.value === item.a) score++;
+      });
+      document.getElementById('score').innerText =
+        `You scored ${score} out of ${questions.length}`;
+    }
+  </script>
+</body>
+</html>
